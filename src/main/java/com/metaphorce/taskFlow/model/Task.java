@@ -40,7 +40,7 @@ public class Task {
 
     public Task() { }
 
-    public Task(long id_task, String username, String description, String start_date, String end_date, int elapsed_time, String assigned_by, Priority priority) {
+    public Task(long id_task, String username, String description, String start_date, String end_date, int elapsed_time, String assigned_by, Priority priority, String task_status) {
         this.id_task = id_task;
         this.username = username;
         this.description = description;
@@ -49,6 +49,7 @@ public class Task {
         this.elapsed_time = elapsed_time;
         this.assigned_by = assigned_by;
         this.priority = priority.toString();
+        this.task_status = task_status;
     }
 
     public long getIdTask() {
