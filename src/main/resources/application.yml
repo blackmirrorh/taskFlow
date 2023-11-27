@@ -1,0 +1,14 @@
+#Application Configuration
+server:
+  port: 9999
+spring:
+  datasource:
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: admin
+    url: jdbc:mysql://localhost:3306/taskFlow?serverTimezone=UTC&useSSL=false
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
