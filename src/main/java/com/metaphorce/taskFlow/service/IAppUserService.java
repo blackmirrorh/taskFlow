@@ -2,6 +2,7 @@ package com.metaphorce.taskFlow.service;
 
 import com.metaphorce.taskFlow.model.AppUser;
 import com.metaphorce.taskFlow.repository.AppUserRepository;
+import com.metaphorce.taskFlow.util.AppUserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class IAppUserService implements AppUserService{
 
     @Override
     public AppUser getUser(String userId) {
-        return appUserRepository.findById(userId).orElse(null);
+        return appUserRepository.findById(userId).orElseThrow(() -> new AppUserNotFoundException(userId));
     }
 
     @Override
@@ -30,24 +31,14 @@ public class IAppUserService implements AppUserService{
 
     @Override
     public void deleteUser(String userId) {
-        AppUser appUser = appUserRepository.findById(userId).orElse(null);
-        if(null != appUser){
-            appUserRepository.delete(appUser);
-        }
-        else {
-            System.out.println("Not found");
-        }
+        AppUser appUser = getUser(userId);
+        appUserRepository.delete(appUser);
     }
 
     @Override
     public void updateUser(String userId, AppUser appUser) {
-        AppUser oldAppUser = appUserRepository.findById(userId).orElse(null);
-        if(null != oldAppUser){
-            appUser.setUsername(oldAppUser.getUsername());
-            appUserRepository.save(appUser);
-        }
-        else {
-            System.out.println("Not found");
-        }
+        AppUser oldUser = getUser(userId);
+        appUser.setUsername(oldUser.getUsername());
+        appUserRepository.save(appUser);
     }
 }
