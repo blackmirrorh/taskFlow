@@ -3,6 +3,7 @@ package com.metaphorce.taskFlow.controller;
 import com.metaphorce.taskFlow.model.Task;
 import com.metaphorce.taskFlow.model.TaskStatus;
 import com.metaphorce.taskFlow.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class TaskController {
     }
 
     @PostMapping("/new-task")
-    public void addTask(@RequestBody Task task){
+    public void addTask(@RequestBody @Valid Task task){
         taskService.addNewTask(task);
     }
 
@@ -36,7 +37,7 @@ public class TaskController {
     }
 
     @PutMapping("{idTask}")
-    public void updateTask(@PathVariable long idTask, @RequestBody Task task){
+    public void updateTask(@PathVariable long idTask, @RequestBody @Valid Task task){
         taskService.updateTask(idTask, task);
     }
 

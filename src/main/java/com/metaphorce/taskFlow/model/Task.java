@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table
@@ -14,27 +16,34 @@ public class Task {
     private long id_task;
 
     @Column
+    @NotBlank(message = "Username is mandatory")
     private String username;
 
     @Column
+    @NotBlank(message = "Description is mandatory")
     private String description;
 
     @Column
+    @Pattern(regexp = "\\d{4}-\\d{1,2}-\\d{1,2}", message = "The start_date format is YYYY-MM-DD")
     private String start_date;
 
     @Column
+    @Pattern(regexp = "\\d{4}-\\d{1,2}-\\d{1,2}", message = "The end_date format is YYYY-MM-DD")
     private String end_date;
 
     @Column
     private int elapsed_time;
 
     @Column
+    @NotBlank(message = "assigned_by is mandatory")
     private String assigned_by;
 
     @Column
+    @NotBlank(message = "Priority is mandatory")
     private String priority;
 
     @Column
+    @NotBlank(message = "Task status is mandatory")
     private String task_status;
 
 

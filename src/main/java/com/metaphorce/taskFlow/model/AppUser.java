@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "AppUser")
@@ -12,12 +14,17 @@ public class AppUser {
     @Id
     private String username;
     @Column
+    @NotBlank(message = "Name is mandatory")
     private String name;
     @Column
+    @NotBlank(message = "password is mandatory")
+    @Size(min = 8, message = "The password should be at least 8 characters")
     private String password;
     @Column
+    @NotBlank(message = "Team is mandatory")
     private String team;
     @Column
+    @NotBlank(message = "Role is mandatory")
     private String role;
 
     public AppUser() { }

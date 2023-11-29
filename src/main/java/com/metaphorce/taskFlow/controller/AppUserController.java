@@ -2,6 +2,7 @@ package com.metaphorce.taskFlow.controller;
 
 import com.metaphorce.taskFlow.model.AppUser;
 import com.metaphorce.taskFlow.service.AppUserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class AppUserController {
     }
 
     @PostMapping("/new-user")
-    public void addNewUser(@RequestBody AppUser appUser){
+    public void addNewUser(@RequestBody @Valid AppUser appUser){
         appUserService.addNewUser(appUser);
     }
 
@@ -35,7 +36,7 @@ public class AppUserController {
     }
 
     @PutMapping("{userId}")
-    public void updateUser(@PathVariable String userId, @RequestBody AppUser appUser){
+    public void updateUser(@PathVariable String userId, @RequestBody @Valid AppUser appUser){
         appUserService.updateUser(userId, appUser);
     }
 }
